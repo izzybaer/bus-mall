@@ -11,7 +11,7 @@
 // The thing you want to build today will select three random photos from the image directory and display them side-by-side-by-side in the browser window.
 var counter = 0;
 
-var images = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'wine-glass', 'water-can'];
+var images = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'wine-glass.jpg', 'water-can.jpg'];
 
 
 function ImageGame(name){
@@ -23,7 +23,13 @@ function ImageGame(name){
 
 }
 
-ImageGame.prototype.generateRandomImage = function (){
+// ImageGame.prototype.generateRandomImage = function (){
+//   var randomImageSelection = Math.floor(Math.random()* (19 - 0 + 1)images[i]);
+//   console.log(randomImageSelection);
+// };
+
+function generateRandomImage(){
   var randomImageSelection = Math.floor(Math.random()* (19 - 0 + 1));
-  console.log(randomImageSelection);
-};
+  images[randomImageSelection];
+  // console.log(images[randomImageSelection]);
+}
