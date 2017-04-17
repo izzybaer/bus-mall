@@ -8,8 +8,6 @@ As the marketing research team, we want the app's purpose to be to have the grou
 \n  
 As the marketing research team, we are not only interested in the total number of clicks, but also the percentage of times that an item was clicked when it was shown. So, you'll also need to keep track of how many times each image is displayed and do the calculations.  
 
-
-
 As a developer, I want to use markup to structure my index.html page, so the layout is in the order of assembly I prefer, with effective use of the markup possibilities offered by HTML.  
 \n  
 As a developer, I want to be able to debug my code by using well structured console messages.  
@@ -20,7 +18,6 @@ As a developer, I want to create a eventListener and eventHandler to listen for 
 \n  
 As a developer, I want to properly design the app and not forget a custom font, color palette, and a layout with semantic HTML.  
 
-
 As a focus group participant, I want the page to be nice to look at.  
 \n  
 As a focus group participant, I want the photos I click on to be interesting.  
@@ -28,5 +25,3 @@ As a focus group participant, I want the photos I click on to be interesting.
 As a focus group participant, I want to seek a mental escape from the drudgery of travel.  
 \n  
 As a focus group participant, I want to choose the most rad images because I think that's what I would like to look at, and what might pass time faster for others who read this catalog in the future.
-
- 
