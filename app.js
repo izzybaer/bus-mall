@@ -90,8 +90,7 @@ function imageAdd(){
     for (var j = 0; j < 20; i++) {
       if (newRandomNumber === numberArray[i])
 
-    }
-  }
+      }
   for (var i = 0; i < 3; i++) {
     randomImage = generateRandomImage();
     var myImageBox = document.getElementById('images-selection');
