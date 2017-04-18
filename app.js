@@ -75,9 +75,23 @@ function generateRandomImage(){
   // console.log(images[randomImageSelection]);
 }
 
+var currentImageOnScreen = [];
+var previousImageOnScreen = [];
+var secondToLastImageOnScreen = [];
+
+// this function adds 3 random images to the page at once
 function imageAdd(){
   var newImage;
   var randomImage;
+  var numberArray = [];
+  function generateRandomNumber() {
+    var newRandomNumber = Math.floor(Math.random()* (19 - 0 + 1));
+    newRandomNumber.push(numberArray);
+    for (var j = 0; j < 20; i++) {
+      if (newRandomNumber === numberArray[i])
+
+    }
+  }
   for (var i = 0; i < 3; i++) {
     randomImage = generateRandomImage();
     var myImageBox = document.getElementById('images-selection');
@@ -86,6 +100,10 @@ function imageAdd(){
     newImage.src = randomImage.filepath;
     // newImage.alt = randomImage.
     myImageBox.appendChild(newImage);
+
+    do
+      generateRandomImage();
+    while (randomImage ===  );
   }
 
 }
@@ -111,4 +129,4 @@ function imageAdd(){
 
 imageAdd();
 
-// generateRandomImage();
+generateRandomImage();
