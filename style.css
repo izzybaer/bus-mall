@@ -1,9 +1,23 @@
 * {
+  width: 100%;
   border-style: border-box;
-  margin 0px auto;
+  margin: 0px auto;
 }
 
+html, body {
+  height:100%;
+}
 img {
   height: 200px;
   width: 200px;
+}
+
+#images-selection {
+  margin: 0px auto;
+  padding: 2px;
+}
+
+#new-chart {
+  display:block;
+  height: 300px;
 }
