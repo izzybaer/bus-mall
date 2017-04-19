@@ -2,16 +2,20 @@
 <html>
   <head> <title> Bus Mall </title>
     <link rel="stylesheet" href="style.css" type="text/css">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
   </head>
   <body>
-    <div id = "bus-mall-body">
-      <div id = "images-selection">
+    <div id="bus-mall-body">
+      <div id="images-selection">
+        <img class="product-photos" id="image1"/>
+        <img class="product-photos" id="image2"/>
+        <img class="product-photos" id="image3"/>
         <!-- <img src = "img/bag.jpg"> -->
       </div>
       <div id="product-list">
       </div>
   </div>
-  <script src="app.js"></script>
+  <canvas id="myChart" width="400" height="400"></canvas>
+  <script src="newapp.js"></script>
   </body>
 </html>
