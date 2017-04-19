@@ -103,8 +103,9 @@ function handleEvent(event) {
     leftImage.removeEventListener('click', handleEvent);
     centerImage.removeEventListener('click', handleEvent);
     rightImage.removeEventListener('click', handleEvent);
-
-    // createChart();
+// when I remove my event handlers, after 25 clicks, I am going to invoke my chart function
+    createChart();
+// in order to put all of my images in one array, I am going to concatenate them
   }
 
   getThreeRandomImages();
@@ -126,4 +127,102 @@ centerImage.src = imagesOnScreen[1].filepath;
 imagesOnScreen[1].timesShown++;
 rightImage.src = imagesOnScreen[2].filepath;
 
-function creatChart();
+// now I am going to write a function to create my chart
+function createChart(){
+
+  allImages = allImages.concat(imagesOnScreen, imagesOnPreviousScreen, imagesOnSecondToLastScreen);
+
+  var canvas = document.getElementById('myChart');
+  canvas.width = '500px';
+  canvas.height = '500px';
+
+
+  var ctx = canvas.getContext('2d');
+
+  var data = {
+    labels: [
+      allImages[0].name,
+      allImages[1].name,
+      allImages[2].name,
+      allImages[3].name,
+      allImages[4].name,
+      allImages[5].name,
+      allImages[6].name,
+      allImages[7].name,
+      allImages[8].name,
+      allImages[9].name,
+      allImages[10].name,
+      allImages[11].name,
+      allImages[12].name,
+      allImages[13].name,
+      allImages[14].name,
+      allImages[15].name,
+      allImages[16].name,
+      allImages[17].name,
+      allImages[18].name,
+      allImages[19].name,
+
+    ],
+    datasets: [
+
+      {
+        label: 'Times Shown',
+        backgroundColor: '#17B77D',
+        data: [
+          allImages[0].timesShown,
+          allImages[1].timesShown,
+          allImages[2].timesShown,
+          allImages[3].timesShown,
+          allImages[4].timesShown,
+          allImages[5].timesShown,
+          allImages[6].timesShown,
+          allImages[7].timesShown,
+          allImages[8].timesShown,
+          allImages[9].timesShown,
+          allImages[10].timesShown,
+          allImages[11].timesShown,
+          allImages[12].timesShown,
+          allImages[13].timesShown,
+          allImages[14].timesShown,
+          allImages[15].timesShown,
+          allImages[16].timesShown,
+          allImages[17].timesShown,
+          allImages[18].timesShown,
+          allImages[19].timesShown,
+        ]
+      },
+      {
+        label: 'Times Clicked',
+        backgroundColor: '#B3FF66',
+        data: [
+          allImages[0].timesClicked,
+          allImages[1].timesClicked,
+          allImages[2].timesClicked,
+          allImages[3].timesClicked,
+          allImages[4].timesClicked,
+          allImages[5].timesClicked,
+          allImages[6].timesClicked,
+          allImages[7].timesClicked,
+          allImages[8].timesClicked,
+          allImages[9].timesClicked,
+          allImages[10].timesClicked,
+          allImages[11].timesClicked,
+          allImages[12].timesClicked,
+          allImages[13].timesClicked,
+          allImages[14].timesClicked,
+          allImages[15].timesClicked,
+          allImages[16].timesClicked,
+          allImages[17].timesClicked,
+          allImages[18].timesClicked,
+          allImages[19].timesClicked,
+        ]
+      },
+    ]
+  };
+
+
+  new Chart(ctx, {
+    type: 'horizontalBar',
+    data: data,
+  });
+}
