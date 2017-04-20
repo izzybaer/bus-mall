@@ -53,8 +53,8 @@ function getRandomImage(list) {
 }
 
 function clickPercent(click, shown){
-  // return click / shown * 100;
-  return Math.floor((click / shown) * 100);
+  return Math.floor(click / shown * 100);
+
 }
 
 function getThreeRandomImages() {
