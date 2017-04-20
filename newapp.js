@@ -231,4 +231,4 @@ function createChart(){
   });
 }
 
-var clickedPercent = imagesOnScreen.timesClicked / imagesOnScreen.timesShown * 100;
+// var clickedPercent = imagesOnScreen.timesClicked / imagesOnScreen.timesShown * 100;
