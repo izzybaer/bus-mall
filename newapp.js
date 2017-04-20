@@ -41,6 +41,21 @@ var allImages = [
   new PageImage ('wine glass artwork', 'wine-glass.jpg', 'wine-glass-id'),
 ];
 
+
+//
+try {
+  allImages = JSON.parse(localStorage.allImages);
+  // console.log(allImages);
+} catch(error){
+  console.log('error retrieving local storage');
+}
+
+
+
+
+
+
+
 function getRandomImage(list) {
   return Math.floor(Math.random() * list.length);
 }
@@ -72,11 +87,11 @@ var leftImage = document.getElementById('image1');
 var centerImage = document.getElementById('image2');
 var rightImage = document.getElementById('image3');
 
-// add event listeners to DOM ID's that invoke handleEvent when user clicks any image
+// add event listeners to DOM ID's that invoke handleImageClicks when user clicks any image
 
-leftImage.addEventListener('click', handleEvent);
-centerImage.addEventListener('click', handleEvent);
-rightImage.addEventListener('click', handleEvent);
+leftImage.addEventListener('click', handleImageClicks);
+centerImage.addEventListener('click', handleImageClicks);
+rightImage.addEventListener('click', handleImageClicks);
 
 // add event handle function and tracks clicks per image/total clicks
 
@@ -86,9 +101,13 @@ rightImage.addEventListener('click', handleEvent);
 // Im going to render the filepaths from imagesOnScreen [0,1,2]
 
 // I'm going to create a handle event that tracks totalClicks and timesClicked
-function handleEvent(event) {
+function handleImageClicks(event) {
   totalClicks++;
   console.log(totalClicks);
+
+
+
+
 
   if(leftImage === event.target) {
     imagesOnScreen[0].timesClicked++;
@@ -100,21 +119,39 @@ function handleEvent(event) {
 
   if (totalClicks === 25) {
 
-    leftImage.removeEventListener('click', handleEvent);
-    centerImage.removeEventListener('click', handleEvent);
-    rightImage.removeEventListener('click', handleEvent);
+    leftImage.removeEventListener('click', handleImageClicks);
+    centerImage.removeEventListener('click', handleImageClicks);
+    rightImage.removeEventListener('click', handleImageClicks);
 // when I remove my event handlers, after 25 clicks, I am going to invoke my chart function
+    allImages = allImages.concat(imagesOnScreen, imagesOnPreviousScreen, imagesOnSecondToLastScreen);
+
     createChart();
 // in order to put all of my images in one array, I am going to concatenate them
+
+
+
+    try {
+      localStorage.allImages = JSON.stringify(allImages);
+      // console.log(localStorage.allImages);
+    } catch(error) {
+      console.log('something went wrong', error);
+    }
+
+
   }
 
   getThreeRandomImages();
 
   leftImage.src = imagesOnScreen[0].filepath;
   imagesOnScreen[0].timesShown++;
+  console.log(imagesOnScreen[0].filepath);
   centerImage.src = imagesOnScreen[1].filepath;
   imagesOnScreen[1].timesShown++;
+  console.log(imagesOnScreen[1].filepath);
   rightImage.src = imagesOnScreen[2].filepath;
+  imagesOnScreen[2].timesShown++;
+  console.log(imagesOnScreen[2].filepath);
+
 
 }
 // this function will run the code that goes through my images
@@ -126,11 +163,13 @@ imagesOnScreen[0].timesShown++;
 centerImage.src = imagesOnScreen[1].filepath;
 imagesOnScreen[1].timesShown++;
 rightImage.src = imagesOnScreen[2].filepath;
+imagesOnScreen[2].timesShown++;
+
+
 
 // now I am going to write a function to create my chart
 function createChart(){
 
-  allImages = allImages.concat(imagesOnScreen, imagesOnPreviousScreen, imagesOnSecondToLastScreen);
 
   var canvas = document.getElementById('myChart');
   canvas.width = '500px';
