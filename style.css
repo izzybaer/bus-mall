@@ -1,20 +1,33 @@
 * {
   width: 100%;
   border-style: border-box;
+  border: 1px solid black;
   margin: 0px auto;
 }
 
 html, body {
   height:100%;
+  background-color: #ABB0B5;
 }
 img {
-  height: 200px;
-  width: 200px;
+  margin: 0 auto;
+  height: 300px;
+  width: 300px;
+  display: inline-block;
+}
+.product-photos {
+  margin: 0 auto;
+  display:inline-block;
+  width: 30%;
+  border-radius: 12px;
 }
 
 #images-selection {
-  margin: 0px auto;
+  margin: 0 auto;
   padding: 2px;
+  width: 960px;
+  text-align: center;
+
 }
 
 #new-chart {
