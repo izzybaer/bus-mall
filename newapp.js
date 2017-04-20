@@ -1,7 +1,7 @@
 'use strict';
 
 var totalClicks = 0;
-// make a constructor for image
+
 function PageImage(name, filepath){
   this.name = name;
   this.filepath = 'img/' + filepath;
@@ -43,7 +43,6 @@ var allImages = [
 
 try {
   allImages = JSON.parse(localStorage.allImages);
-  // console.log(allImages);
 } catch(error){
   console.log('error retrieving local storage');
 }
@@ -83,7 +82,6 @@ rightImage.addEventListener('click', handleImageClicks);
 
 function handleImageClicks(event) {
   totalClicks++;
-  console.log(totalClicks);
 
   if(leftImage === event.target) {
     imagesOnScreen[0].timesClicked++;
@@ -105,7 +103,6 @@ function handleImageClicks(event) {
 
     try {
       localStorage.allImages = JSON.stringify(allImages);
-      // console.log(localStorage.allImages);
     } catch(error) {
       console.log('something went wrong', error);
     }
@@ -115,13 +112,10 @@ function handleImageClicks(event) {
 
   leftImage.src = imagesOnScreen[0].filepath;
   imagesOnScreen[0].timesShown++;
-  console.log(imagesOnScreen[0].filepath);
   centerImage.src = imagesOnScreen[1].filepath;
   imagesOnScreen[1].timesShown++;
-  console.log(imagesOnScreen[1].filepath);
   rightImage.src = imagesOnScreen[2].filepath;
   imagesOnScreen[2].timesShown++;
-  console.log(imagesOnScreen[2].filepath);
 
 }
 
@@ -137,7 +131,6 @@ imagesOnScreen[2].timesShown++;
 function createChart(){
   for (var i = 0; i < allImages.length; i++){
     allImages[i].shownPercent = clickPercent(allImages[i].timesClicked, allImages[i].timesShown);
-    console.log(clickPercent);
   }
 
   var canvas = document.getElementById('myChart');
@@ -230,5 +223,3 @@ function createChart(){
     data: data,
   });
 }
-
-// var clickedPercent = imagesOnScreen.timesClicked / imagesOnScreen.timesShown * 100;
