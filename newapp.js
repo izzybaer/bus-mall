@@ -7,12 +7,12 @@ function PageImage(name, filepath){
   this.filepath = 'img/' + filepath;
   this.timesShown = 0;
   this.timesClicked = 0;
+  this.shownPercent = 0;
 }
 
 var imagesOnSecondToLastScreen = [];
 var imagesOnPreviousScreen = [];
 var imagesOnScreen = [];
-
 
 var allImages = [
 
@@ -41,24 +41,30 @@ var allImages = [
   new PageImage ('wine glass artwork', 'wine-glass.jpg', 'wine-glass-id'),
 ];
 
+try {
+  allImages = JSON.parse(localStorage.allImages);
+  // console.log(allImages);
+} catch(error){
+  console.log('error retrieving local storage');
+}
+
 function getRandomImage(list) {
   return Math.floor(Math.random() * list.length);
 }
 
-// get three random images
+function clickPercent(click, shown){
+  return Math.floor(click / shown * 100);
+
+}
+
 function getThreeRandomImages() {
   allImages = allImages.concat(imagesOnSecondToLastScreen);
   imagesOnSecondToLastScreen = imagesOnPreviousScreen;
   imagesOnPreviousScreen = imagesOnScreen;
   imagesOnScreen = [];
 
-
-// i am going to create a variable nextImage to keep track of the next image I take out of allImages
-// then i am going to splice out an object to remove it from allImages
   var nextImage = allImages.splice(getRandomImage(allImages),1);
-  // I am going to concat the array returned by the splice onto imagesOnScreen
   imagesOnScreen = imagesOnScreen.concat(nextImage);
-  // I am going to repeat this process two more times to get two more imagesOnScreen
   nextImage = allImages.splice(getRandomImage(allImages),1);
   imagesOnScreen = imagesOnScreen.concat(nextImage);
   nextImage = allImages.splice(getRandomImage(allImages),1);
@@ -67,26 +73,15 @@ function getThreeRandomImages() {
   return imagesOnScreen;
 }
 
-// assign variables to DOM ID's (id's that exist in html)
 var leftImage = document.getElementById('image1');
 var centerImage = document.getElementById('image2');
 var rightImage = document.getElementById('image3');
 
-// add event listeners to DOM ID's that invoke handleEvent when user clicks any image
+leftImage.addEventListener('click', handleImageClicks);
+centerImage.addEventListener('click', handleImageClicks);
+rightImage.addEventListener('click', handleImageClicks);
 
-leftImage.addEventListener('click', handleEvent);
-centerImage.addEventListener('click', handleEvent);
-rightImage.addEventListener('click', handleEvent);
-
-// add event handle function and tracks clicks per image/total clicks
-
-
-
-// Im going to call the function getThreeRandomImages
-// Im going to render the filepaths from imagesOnScreen [0,1,2]
-
-// I'm going to create a handle event that tracks totalClicks and timesClicked
-function handleEvent(event) {
+function handleImageClicks(event) {
   totalClicks++;
   console.log(totalClicks);
 
@@ -100,42 +95,54 @@ function handleEvent(event) {
 
   if (totalClicks === 25) {
 
-    leftImage.removeEventListener('click', handleEvent);
-    centerImage.removeEventListener('click', handleEvent);
-    rightImage.removeEventListener('click', handleEvent);
-// when I remove my event handlers, after 25 clicks, I am going to invoke my chart function
+    leftImage.removeEventListener('click', handleImageClicks);
+    centerImage.removeEventListener('click', handleImageClicks);
+    rightImage.removeEventListener('click', handleImageClicks);
+
+    allImages = allImages.concat(imagesOnScreen, imagesOnPreviousScreen, imagesOnSecondToLastScreen);
+
     createChart();
-// in order to put all of my images in one array, I am going to concatenate them
+
+    try {
+      localStorage.allImages = JSON.stringify(allImages);
+      // console.log(localStorage.allImages);
+    } catch(error) {
+      console.log('something went wrong', error);
+    }
   }
 
   getThreeRandomImages();
 
   leftImage.src = imagesOnScreen[0].filepath;
   imagesOnScreen[0].timesShown++;
+  console.log(imagesOnScreen[0].filepath);
   centerImage.src = imagesOnScreen[1].filepath;
   imagesOnScreen[1].timesShown++;
+  console.log(imagesOnScreen[1].filepath);
   rightImage.src = imagesOnScreen[2].filepath;
+  imagesOnScreen[2].timesShown++;
+  console.log(imagesOnScreen[2].filepath);
 
 }
-// this function will run the code that goes through my images
+
 getThreeRandomImages();
-// then this code will render the images to the page
 
 leftImage.src = imagesOnScreen[0].filepath;
 imagesOnScreen[0].timesShown++;
 centerImage.src = imagesOnScreen[1].filepath;
 imagesOnScreen[1].timesShown++;
 rightImage.src = imagesOnScreen[2].filepath;
+imagesOnScreen[2].timesShown++;
 
-// now I am going to write a function to create my chart
 function createChart(){
-
-  allImages = allImages.concat(imagesOnScreen, imagesOnPreviousScreen, imagesOnSecondToLastScreen);
+  for (var i = 0; i < allImages.length; i++){
+    allImages[i].shownPercent = clickPercent(allImages[i].timesClicked, allImages[i].timesShown);
+    console.log(clickPercent);
+  }
 
   var canvas = document.getElementById('myChart');
   canvas.width = '500px';
   canvas.height = '500px';
-
 
   var ctx = canvas.getContext('2d');
 
@@ -161,10 +168,8 @@ function createChart(){
       allImages[17].name,
       allImages[18].name,
       allImages[19].name,
-
     ],
     datasets: [
-
       {
         label: 'Times Shown',
         backgroundColor: '#17B77D',
@@ -220,9 +225,10 @@ function createChart(){
     ]
   };
 
-
   new Chart(ctx, {
     type: 'horizontalBar',
     data: data,
   });
 }
+
+var clickedPercent = imagesOnScreen.timesClicked / imagesOnScreen.timesShown * 100;
