@@ -1,24 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head> <title> Bus Mall </title>
-
+    <link href="https://fonts.googleapis.com/css?family=Asar" rel="stylesheet">
     <link rel="stylesheet" href="style.css" type="text/css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
   </head>
   <body>
-    <h1> Bus Mall <h1>
-      <h2> Please take our survey! <br> Click on one image out of three that represents a product you would be interested in. </h2>
     <div id="bus-mall-body">
-      <div id="images-selection">
-        <img class="product-photos" id="image1"/>
-        <img class="product-photos" id="image2"/>
-        <img class="product-photos" id="image3"/>
-        <!-- <img src = "img/bag.jpg"> -->
-      </div>
-      <div id="new-chart">
-        <canvas id="myChart" width="400" height="400"></canvas>
-      </div>
+      <h1 class="title"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Bus-logo.svg/1024px-Bus-logo.svg.png"> Bus Mall <h1>
+        <h2 class="instructions"> Please take our survey! <br> Click on one image out of three that represents a product you would be interested in. </h2>
+        <div id="images-selection">
+          <img class="product-photos" id="image1"/>
+          <img class="product-photos" id="image2"/>
+          <img class="product-photos" id="image3"/>
+        </div>
+        <div id="new-chart">
+          <canvas id="myChart" width="400" height="200"></canvas>
+        </div>
     </div>
-  <script src="newapp.js"></script>
+  <script src="app.js"></script>
   </body>
 </html>

@@ -132,7 +132,6 @@ function createChart(){
   for (var i = 0; i < allImages.length; i++){
     allImages[i].shownPercent = clickPercent(allImages[i].timesClicked, allImages[i].timesShown);
   }
-
   var canvas = document.getElementById('myChart');
   canvas.width = '500px';
   canvas.height = '500px';
@@ -217,7 +216,8 @@ function createChart(){
       },
     ]
   };
-
+  Chart.defaults.global.defaultFontFamily = 'Asar';
+  Chart.defaults.global.defaultFontColor = '#303233';
   new Chart(ctx, {
     type: 'horizontalBar',
     data: data,
